@@ -19,8 +19,16 @@ jobs:
           root: ~/project
           paths:
             - .
-
-  
+  build_docker_image:
+    executor: docker
+    steps:
+      - checkout
+      - run:
+          command: docker build -t jennykibiri/freestyle-jenkins-node-app .
+          name: Build docker image
+      - run:
+          command: docker push jennykibiri/freestyle-jenkins-node-app
+          name: Push docker image 
 workflows:
   test_my_app:
     jobs:
