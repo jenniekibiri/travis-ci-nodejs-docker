@@ -51,7 +51,7 @@ workflows:
       - build_docker_image:
           requires:
           - build_and_test
-          only: master
+         
           # run:
           #   - echo '***Build starts***'
           #   - echo 'Running Tests'
