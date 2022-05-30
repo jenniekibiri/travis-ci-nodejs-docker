@@ -38,6 +38,7 @@ jobs:
     executor: docker-publisher
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Build docker image
           command: docker build -t jennykibiri/freestyle-jenkins-node-app .
