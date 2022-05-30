@@ -4,15 +4,18 @@ node_js:
 cache:
   directories:
     - "node_modules"
+branches:
+  only:
+    - master     
 install:
   - echo 'Instaling Dependencies'
   - npm install  
+services: 
+    - docker  
 script:
   - echo '***Build starts***'   
   - echo 'Running Tests'
   - npm run test
   - echo 'Building'
-branches:
-  only:
-    - master 
-# before_script:
+  - docker build -t jennykibiri/freestyle-jenkins-node-app .
+
