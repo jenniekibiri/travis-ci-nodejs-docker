@@ -37,45 +37,21 @@ jobs:
           name: Build docker image
           command: docker build -t jennykibiri/freestyle-jenkins-node-app .
       - run:
-          command: docker push jennykibiri/freestyle-jenkins-node-app
-          name: Push docker image 
-      - run:
-          name: Archive Docker image
-          command: docker save --output image.tar "${IMAGE_TAG}"
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
-   
-  push:
-    executor: docker-publisher
-    steps:
-      - setup_remote_docker
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Load Docker image
-          command: docker load --input /tmp/workspace/image.tar
-      - run:
           name: Publish Docker image
           command: |
             echo "${PASSWORD}" | docker login --username "${USERNAME}" --password-stdin
             docker push "${IMAGE_TAG}"
-
-
+   
+  
 
 workflows:
   test_my_app:
     jobs:
       - build_and_test
       - build_docker_image
-      - push:
-          requires:
-            - build_and_test
-            - build_docker_image
-          filters:
-            branches:
-              only: master  
+filters:
+  branches:
+   only: master  
 
   
    
