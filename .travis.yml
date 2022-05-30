@@ -18,4 +18,5 @@ script:
   - npm run test
   - echo 'Building'
   - docker build -t jennykibiri/freestyle-jenkins-node-app .
+  - echo $PASSWORD | docker login  -u $USERNAME --password-stdin 
 
