@@ -46,7 +46,7 @@ jobs:
           name: Publish Docker image
           command: |
             echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
-            docker push "${IMAGE_TAG}"
+            docker push jennykibiri/freestyle-jenkins-node-app
    
   
 
