@@ -30,7 +30,7 @@ jobs:
 
 
   build_docker_image:
-    executor: docker/default
+    executor: docker-publisher
     steps:
       - checkout
       - run:
