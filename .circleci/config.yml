@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Publish Docker image
           command: |
-            echo "${PASSWORD}" | docker login --username "${USERNAME}" --password-stdin
+            echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
             docker push "${IMAGE_TAG}"
    
   
