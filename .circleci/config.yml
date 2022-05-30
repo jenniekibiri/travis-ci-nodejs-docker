@@ -25,7 +25,7 @@ jobs:
 
 
   build_docker_image:
-    executor: docker
+    executor: docker/default
     steps:
       - checkout
       - run:
