@@ -51,20 +51,4 @@ workflows:
       - build_docker_image:
           requires:
           - build_and_test
-         
-          # run:
-          #   - echo '***Build starts***'
-          #   - echo 'Running Tests'
-          #   - npm run test
-          #   - echo 'Building'
-          #   - docker build -t jennykibiri/freestyle-jenkins-node-app .
-          #   - echo $PASSWORD | docker login  -u $USERNAME --password-stdin 
-          #   - echo '***Build ends***'
-    
-
-#  - deploy:
-        #   requires:
-      #       - build_and_test # only deploy if the build_and_test job has completed
-      #     filters:
-      #       branches:
-      #         only: main # only deploy when on main
+      

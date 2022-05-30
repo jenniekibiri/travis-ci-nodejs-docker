@@ -2,7 +2,10 @@
 
 [![Build Status](https://app.travis-ci.com/jenniekibiri/travis-ci-nodejs-docker.svg?branch=master)](https://app.travis-ci.com/jenniekibiri/travis-ci-nodejs-docker)
 
-Travis Docker Docs - https://docs.travis-ci.com/user/docker/
+- Travis Docker Docs - https://docs.travis-ci.com/user/docker/
+- https://emmer.dev/blog/publishing-docker-images-with-circleci/
+- https://github.com/armstrong99/circleci-docker-CICD-pipeline-NodeJS/blob/main/.circleci/config.yml
+- https://blog.devgenius.io/deploy-images-to-dockerhub-with-circleci-3f5b716cfe1e
 <!-- image -->
 ![travis](https://i.imgur.com/atqQ8QF.png)
 
