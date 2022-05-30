@@ -1,25 +1,33 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.7
-workflows:
+  node: circleci/node@5.0.2
 
-  sample: 
-    jobs:
-      - node/test:
-          runs-on: node
-          steps:
-            - echo '***Installl packages***'
-            - npm install
-            - echo '***Build starts***'
-            - echo 'Running Tests'
-            - npm run test
-            - echo 'Building'
-            - docker build -t jennykibiri/freestyle-jenkins-node-app .
-            - echo $PASSWORD | docker login  -u $USERNAME --password-stdin 
-            - echo '***Build ends***'
-branches:
-      only:
-      - master      
+jobs:
+  build_and_test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: npm build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
   
-
-
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
+      # - deploy:
+      #     requires:
+      #       - build_and_test # only deploy if the build_and_test job has completed
+      #     filters:
+      #       branches:
+      #         only: main # only deploy when on main
