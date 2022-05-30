@@ -1,12 +1,17 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
+  docker: circleci/docker@1.5.0
 executors:
   docker-publisher:
     environment:
-      IMAGE_TAG: jennykibiri/freestyle-jenkins-node-app:latest
+      IMAGE_NAME: jennykibiri/freestyle-jenkins-node-app
     docker:
-      - image: docker:stable
+      - image: circleci/node:latest
+        auth:
+            username: $USERNAME
+            password: $PASSWORD
+
 
 
 jobs:
@@ -48,10 +53,10 @@ workflows:
   test_my_app:
     jobs:
       - build_and_test
+  build_docker_image:
+    jobs:
       - build_docker_image
-filters:
-  branches:
-   only: master  
+      
 
   
    
