@@ -59,7 +59,9 @@ workflows:
       - build_docker_image:
           requires:
           - build_and_test
-       - deploy_to_server:
-           requires:
-            - build_docker_image    
+      - deploy_to_server:
+          requires:
+          - build_docker_image
+     
       
+       
