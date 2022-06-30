@@ -47,7 +47,6 @@ jobs:
      - run:
         name: Run docker image on Digital Ocean Droplet
         command: |
-        ssh 
           ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  'docker stop jennykibiri/freestyle-jenkins-node-app && docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d -t -p 3000:3000 --name jennykibiri/freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
 
 
