@@ -43,6 +43,11 @@ jobs:
           command: |
             echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
             docker push jennykibiri/freestyle-jenkins-node-app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+            
   deploy_to_server:
     docker:
       - image: circleci/node:7
@@ -52,7 +57,8 @@ jobs:
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  '"$PASSWORD" | docker login --username "$USERNAME" --password-stdin docker stop $(docker ps -q) && docker rm $(docker ps -a -q) && docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d -p 3000:3000 --name freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
+            echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  'docker stop $(docker ps -q) && docker rm $(docker ps -a -q) && docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d -p 3000:3000 --name freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
 
 workflows:
   test_my_app:
