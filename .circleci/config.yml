@@ -53,9 +53,8 @@ jobs:
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no   
-            echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
-            docker run -d -p 3000:3000 jennykibiri/freestyle-jenkins-node-app
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin && docker run -d -p 3000:3000 jennykibiri/freestyle-jenkins-node-app'
+            
             
             
 
