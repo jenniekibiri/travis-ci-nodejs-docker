@@ -43,7 +43,10 @@ jobs:
           command: |
             echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
             docker push jennykibiri/freestyle-jenkins-node-app
+
+
   deploy_to_server:
+    executor: docker-publisher
     docker:
       - image: jennykibiri/freestyle-jenkins-node-app:latest
         auth:
@@ -55,6 +58,7 @@ jobs:
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
+
             ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  'docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d  -p 3000:3000 --name jennykibiri/freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
 
 workflows:
