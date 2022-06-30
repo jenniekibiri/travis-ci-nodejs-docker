@@ -50,14 +50,17 @@ jobs:
             
   deploy_to_server:
     docker:
-      - image: circleci/node:7
+      - image: jennykibiri/freestyle-jenkins-node-app
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  'docker login --username $USERNAME --password $PASSWORD && docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d -p 3000:3000 --name freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no  'docker pull jennykibiri/freestyle-jenkins-node-app && docker run -d -p 3000:3000 --name freestyle-jenkins-node-app jennykibiri/freestyle-jenkins-node-app'
 
 workflows:
   test_my_app:
