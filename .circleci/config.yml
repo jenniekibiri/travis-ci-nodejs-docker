@@ -50,10 +50,12 @@ jobs:
             
   deploy_to_server:
     docker:
-      - image: circleci/node:7
+      - image: jennykibiri/freestyle-jenkins-node-app
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
