@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker run -d -p 80:80 -p 3000:3000 --name freestyle-jenkins-node-app1 jennykibiri/freestyle-jenkins-node-app --restart=always --name=through-cache -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME="$USERNAME" -e REGISTRY_PROXY_PASSWORD="$PASSWORD"'
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker run -d  -p 3000:3000 --name freestyle-jenkins-node-app1 jennykibiri/freestyle-jenkins-node-app  -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME="$USERNAME" -e REGISTRY_PROXY_PASSWORD="$PASSWORD"'
 
 workflows:
   test_my_app:
