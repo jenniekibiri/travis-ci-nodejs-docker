@@ -55,9 +55,7 @@ jobs:
       - run: bash deploy.sh
 
 
- 
-
-           
+            
             
             
 
@@ -65,6 +63,9 @@ workflows:
   test_my_app:
     jobs:
       - build_and_test
+      - build_docker_image:
+          requires:
+          - build_and_test
       - deploy
      
       
