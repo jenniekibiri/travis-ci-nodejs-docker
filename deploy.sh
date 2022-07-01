@@ -30,9 +30,9 @@ echo "Deploying via remote SSH"
 ssh -o StrictHostKeyChecking=no  "root@${SSH_HOST}" \
   "echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin \
   && docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
-  && docker stop autodeploy-docker \
-  && docker rm autodeploy-docker \
-  && docker run --init -d --name autodeploy-docker -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG} \
+  && docker stop freelestyle-jenkins-node-app \
+  && docker rm freelestyle-jenkins-node-app \
+  && docker run --init -d --name freelestyle-jenkins-node-app -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG} \
   && docker system prune -af" # remove unused images to free up space
 
 echo "Successfully deployed, hooray!"
