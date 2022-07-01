@@ -8,20 +8,15 @@ IMAGE_TAG=$(git rev-parse --short HEAD) # first 7 characters of the current comm
 
 
 # Decode SSH key
-echo "${SSH_KEY}"
-# echo 'export SSH_KEY="$(echo ${SSH_KEY} | base64 -d)"' 
 echo "export SSH_KEY=\"${SSH_KEY}\""
 echo "${SSH_KEY}"  > ~/.ssh/id_rsa
+echo "export SSH_HOST=\"${SSH_HOST}\""
 
-
+ # private keys need to have strict permission to be accepted by SSH agent
 chmod 600  ~/.ssh/id_rsa 
-  # private keys need to have strict permission to be accepted by SSH agent
-
-# Add production server to known hosts digitalocean.com
-ssh-keyscan -t ecdsa github.com >> ~/.ssh/known_hosts
-
-
-
+ 
+ #Add production server to known hosts
+echo "${SSH_HOST}"  >> ~/.ssh/known_hosts
 
 
 echo "Deploying via remote SSH"
