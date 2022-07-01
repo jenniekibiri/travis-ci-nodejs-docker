@@ -23,7 +23,7 @@ chmod 600  ~/.ssh/id_rsa
   # private keys need to have strict permission to be accepted by SSH agent
 
 # Add production server to known hosts
-echo "${SSH_HOST}" | base64 -di >> ~/.ssh/known_hosts
+echo "${SSH_HOST}"  >> ~/.ssh/known_hosts
 
 
 
