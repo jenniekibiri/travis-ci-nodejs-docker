@@ -16,7 +16,9 @@ docker push "${IMAGE_NAME}:${IMAGE_TAG}"
 docker push "${IMAGE_NAME}:latest"
 
 # Decode SSH key
+echo "${SSH_KEY}"
 echo "${SSH_KEY}" | base64 --decode > ~/.ssh/id_rsa
+
 chmod 600 ssh_key # private keys need to have strict permission to be accepted by SSH agent
 
 # # Add production server to known hosts
