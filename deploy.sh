@@ -9,7 +9,16 @@ IMAGE_TAG=$(git rev-parse --short HEAD) # first 7 characters of the current comm
 
 # Decode SSH key
 echo "${SSH_KEY}"
-echo "${SSH_KEY}" | base64 --decode > ~/.ssh/id_rsa
+# echo 'export SSH_KEY="$(echo ${SSH_KEY} | base64 -d)"' 
+
+echo "export SSH_KEY=\"${SSH_KEY}\""
+
+
+
+
+
+
+echo "${SSH_KEY}"  > ~/.ssh/id_rsa
 
 
 chmod 600  ~/.ssh/id_rsa 
