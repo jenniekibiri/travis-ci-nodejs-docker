@@ -18,7 +18,7 @@ docker push "${IMAGE_NAME}:latest"
 
 
 echo "Deploying via remote SSH"
-ssh  "root@${$SSH_HOST}" \
+ssh  "root@${SSH_HOST}" \
   "echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin \
   && docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
   && docker stop autodeploy-docker \
