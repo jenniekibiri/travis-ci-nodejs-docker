@@ -35,16 +35,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Build docker image
-          command: docker build -t jennykibiri/freestyle-jenkins-node-app .
-      - run:
-          name: Publish Docker image
-          command: |
-            echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin
-            docker push jennykibiri/freestyle-jenkins-node-app
-  # Build a Docker image and push to Docker Hub
-  # Authenticate with Digital Ocean CLI and deploy the app
+      - run: bash build-image.sh
+         
   deploy:
     docker:
       - image: circleci/node:12.15.0-stretch
@@ -53,11 +45,7 @@ jobs:
       # Allow using Docker commands
       - setup_remote_docker
       - run: bash deploy.sh
-
-
-            
-            
-            
+    
 
 workflows:
   test_my_app:
@@ -66,7 +54,15 @@ workflows:
       - build_docker_image:
           requires:
           - build_and_test
-      - deploy
+      - deploy:
+          requires:
+          - build_docker_image
+          filters:
+            branches:
+              # Only deploy on pushes to the master branch
+              only: master
+
+
      
       
        
