@@ -11,7 +11,7 @@ docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
 docker tag "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:latest"
 
 echo "Authenticating and pushing image to Docker Hub"
-echo "${PASSWORD" | docker login -u "${PASSWORD}" --password-stdin
+echo "${PASSWORD}" | docker login -u "${PASSWORD}" --password-stdin
 docker push "${IMAGE_NAME}:${IMAGE_TAG}"
 docker push "${IMAGE_NAME}:latest"
 
@@ -19,8 +19,8 @@ docker push "${IMAGE_NAME}:latest"
 
 echo "Deploying via remote SSH"
 ssh  "root@${$SSH_HOST}" \
-  "echo "${PASSWORD" | docker login -u "${PASSWORD}" --password-stdin\
-  docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
+  "echo "${PASSWORD}" | docker login -u "${PASSWORD}" --password-stdin \
+  && docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
   && docker stop autodeploy-docker \
   && docker rm autodeploy-docker \
   && docker run --init -d --name autodeploy-docker -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG} \
