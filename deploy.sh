@@ -8,20 +8,23 @@ IMAGE_TAG=$(git rev-parse --short HEAD) # first 7 characters of the current comm
 
 
 # Decode SSH key
+echo "${SSH_KEY}"
+# echo 'export SSH_KEY="$(echo ${SSH_KEY} | base64 -d)"' 
+
 echo "export SSH_KEY=\"${SSH_KEY}\""
+
 echo "${SSH_KEY}"  > ~/.ssh/id_rsa
-echo "export SSH_HOST=\"${SSH_HOST}\""
 
- # private keys need to have strict permission to be accepted by SSH agent
+
 chmod 600  ~/.ssh/id_rsa 
- 
- #Add production server to known hosts
-echo "${SSH_HOST}"  >> ~/.ssh/known_hosts
+  # private keys need to have strict permission to be accepted by SSH agent
 
+# Add production server to known hosts
+echo "${SSH_HOST}"  >> ~/.ssh/known_hosts
 
 echo "Deploying via remote SSH"
 # ssh into the server and run the following commands
-ssh "root@${SSH_HOST}" \
+ssh -o StrictHostKeyChecking=no  "root@${SSH_HOST}" \
   "echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin \
   && docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
   && docker stop freelestyle-jenkins-node-app \
