@@ -10,6 +10,7 @@ IMAGE_TAG=$(git rev-parse --short HEAD) # first 7 characters of the current comm
 # Decode SSH key
 echo "${SSH_KEY}"
 echo "${SSH_KEY}" > ~/.ssh/id_rsa
+echo "${SSH_KEY}" | base64 -d > ssh_key
 
 chmod 600  ~/.ssh/id_rsa 
   # private keys need to have strict permission to be accepted by SSH agent
