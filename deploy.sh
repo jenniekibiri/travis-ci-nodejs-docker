@@ -20,8 +20,9 @@ docker push "${IMAGE_NAME}:latest"
 
 echo "Deploying via remote SSH"
 # ssh into the server and run the following commands
-
-ssh  "root@${SSH_HOST}" \
+ssh \
+    -o UserKnownHostsFile= ~/.ssh/known_hosts \
+    -o StrictHostKeyChecking=yes  "root@${SSH_HOST}" \
   "echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin \
   && docker pull ${IMAGE_NAME}:${IMAGE_TAG} \
   && docker stop autodeploy-docker \
